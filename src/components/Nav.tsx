@@ -160,7 +160,7 @@ const Nav = () => {
         if (!data?.site_configs_tagline)
           data.site_configs_tagline = "Your Tagline Here";
 
-        setPageOverride(false);
+        setPageOverride(true);
         // setPageOverride(!!data.site_configs_override);
         setSiteConfig(data);
 
