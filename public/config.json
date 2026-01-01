@@ -1,0 +1,8 @@
+{
+    "API_BASE_URL": "https://was2.wadex.app/api/v1",
+    "WDX_PUBLIC_KEY": "d2FkZTR3ZWJzaXRlQDcwMjExNjZmLWZlZjktNDQ3My1hNWRlLWIzOGVkZDYxYmE1Zg==",
+    "APPLICATION_ID": "f12bfbd9-94f4-4958-a6f4-5301267c83bf",
+    "WDX_LOG_REQUEST": true,
+    "enableLogin": true,
+    "GOOGLE_PLACES_API_KEY": "AIzaSyAyHFoquDA9NPb44Jm3bQyFb5ZA2VLwAXY"
+}

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/bg.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/node_modules/primeicons/primeicons.css">
+
+  <title>Master WB2</title>
+  <style>
+    .copy-right {
+      font-size: .9rem;
+      padding: 0.3rem 1rem .2rem 1rem;
+      background: #ececec;
+      margin-top: 1rem;
+      text-align: right;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root" style="height: auto;"></div>
+  <div class="copy-right">
+    © <span id="year"></span> Compliant Global. All rights reserved. v.<span id="version">%VITE_APP_VERSION%</span>
+  </div>
+  <script type="module" src="/src/main.tsx"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    if (typeof global === 'undefined') {
+      window.global = window;
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+DirectoryIndex disabled
+# Redirect traffic to your port 8090
+RewriteEngine On
+RewriteBase /
+RewriteRule ^(.*)$ http://localhost:8090/$1 [P,L]
