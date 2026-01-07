@@ -6,12 +6,22 @@ import { getSiteConfig } from "../services/page.service";
 import type { ISiteConfig } from "../types/page";
 
 function NestedMenu({ menus }: any) {
-
   return (
     <div className="menu-container">
-      <ul className="menu-root flex">
+      <ul className="menu-root flex align-items-center gap-3">
         {menus.map((item: any, i: any) => (
           <MenuItem key={i} item={item} level={0} />
+        ))}
+      </ul>
+    </div>
+  );
+}
+function ButtonMenu({ menus }: any) {
+  return (
+    <div className="button-container">
+      <ul className="menu-root flex align-items-center gap-3">
+        {menus.map((item: any, i: any) => (
+          <ButtonItem key={i} item={item} level={0} />
         ))}
       </ul>
     </div>
@@ -20,6 +30,8 @@ function NestedMenu({ menus }: any) {
 
 function MenuItem({ item, level }: any) {
   const hasChildren = item.sub_menu_items?.length > 0;
+
+  if (item.main_menu_label_type !== "text") return null;
 
   return (
     <li className={`menu-item level-${level}`}>
@@ -33,11 +45,26 @@ function MenuItem({ item, level }: any) {
 
       {hasChildren && (
         <ul className="submenu">
-          {item.sub_menu_items.map((child: any, i: any) => (
+          {item.sub_menu_items.map((child: any, i: number) => (
             <MenuItem key={i} item={child} level={level + 1} />
           ))}
         </ul>
       )}
+    </li>
+  );
+}
+
+function ButtonItem({ item, level }: any) {
+  if (item.main_menu_label_type !== "button") return null;
+
+  return (
+    <li className={`menu-item level-${level}`}>
+      <NavLink
+        to={item.main_menu_canonical || item.sub_menu_canonical}
+        className="xl:block hidden btn btn-primary w-max"
+      >
+        {item.main_menu_label || item.sub_menu_label}
+      </NavLink>
     </li>
   );
 }
@@ -128,7 +155,6 @@ const Nav = () => {
   }, []);
 
   const { menus, loading } = useStoreContext();
-    console.log("Menus:", menus);
 
   const menuRef = useRef<HTMLUListElement | null>(null);
   const toggleRef = useRef<HTMLDivElement | null>(null);
@@ -160,7 +186,7 @@ const Nav = () => {
         if (!data?.site_configs_tagline)
           data.site_configs_tagline = "Your Tagline Here";
 
-        setPageOverride(true);
+        setPageOverride(false);
         // setPageOverride(!!data.site_configs_override);
         setSiteConfig(data);
 
@@ -191,7 +217,7 @@ const Nav = () => {
   return (
     <>
       <nav className={isSticky ? "main-menu sticky" : "main-menu"}>
-        <div className="container flex justify-content-between">
+        <div className="container flex justify-content-between align-items-center py-2">
           <div className="relative">
             <NavLink to={"/"} className="logo">
               {siteConfig?.site_configs_logo && (
@@ -200,6 +226,7 @@ const Nav = () => {
             </NavLink>
           </div>
           <NestedMenu menus={menus} />
+          <ButtonMenu menus={menus} />
           <MobileSideMenu menus={menus} />
         </div>
       </nav>

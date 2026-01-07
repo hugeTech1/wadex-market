@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Nav from "../components/Nav";
-// import Footer from "../components/Footer";
+import Footer from "../components/Footer";
 import { useStoreContext } from "../context/StoreContext";
 
 const Layout = () => {
@@ -19,7 +19,7 @@ const Layout = () => {
             </main>
 
             {/* Footer always at bottom */}
-            {/* <Footer /> */}
+            <Footer />
         </div>
     );
 };
