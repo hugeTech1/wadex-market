@@ -18,7 +18,7 @@ const CarouselWrapper = ({ query_id }: { query_id: string }) => {
 
     useEffect(() => {
         setLoading(true);
-        getQueryData("f6e1a0ba-d1f5-4682-a9fe-689aacf49f01")
+        getQueryData("f6e1a0ba-d1f5-4682-a9fe-689aacf49f01", { carouselid: "home-slider" })
             .then((res) => {
                 const data = (res as any)?.data?.[0];
                 if (!data) return;
