@@ -109,7 +109,10 @@ const PageData = ({ pageData }: { pageData: IPageData[] }) => {
                                 {stripHtml(block.block_segment)}
                               </h2>
 
-                              <TabList shortcode={block.blocks_shortcode} layout={block.blocks_elementid} />
+                              <TabList
+                                shortcode={block.blocks_shortcode}
+                                layout={block.blocks_elementid}
+                              />
                             </div>
                           );
                         case "video-section":
@@ -133,6 +136,8 @@ const PageData = ({ pageData }: { pageData: IPageData[] }) => {
                           return <StatsCards data={block} />;
                         case "teams":
                           return <TeamMembers data={block} />;
+                        case "courses":
+                          return <Courses data={block} />;
 
                         default:
                           return (
@@ -147,7 +152,7 @@ const PageData = ({ pageData }: { pageData: IPageData[] }) => {
                     })()}
 
                   {block.blocks_type === "form" && block.blocks_shortcode && (
-                    <FormBuilderContainer formId={block.blocks_shortcode} />
+                    <FormBuilderContainer formId={block.blocks_shortcode} data={block} />
                   )}
                   {block.blocks_type === "carousal" && (
                     <>

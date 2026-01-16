@@ -67,7 +67,7 @@ const DynamicPage = () => {
 
                 // Normal page resolution by slug/uuid
                 const uuid = getUuidFromSlug(slug, menus);
-                console.log("🚀 ~ fetchPage ~ uuid:", uuid)
+               
                 
 
                 if (!uuid) {

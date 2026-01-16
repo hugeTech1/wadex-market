@@ -71,7 +71,7 @@ function ButtonItem({ item, level }: any) {
 
 function MobileSideMenu({ menus }: any) {
   const [mobileOpen, setMobileOpen] = useState(false);
-
+  const closeSidebar = () => setMobileOpen(false);
   return (
     <>
       <button className="mobile-menu-btn" onClick={() => setMobileOpen(true)}>
@@ -95,7 +95,12 @@ function MobileSideMenu({ menus }: any) {
 
         <ul className="side-root">
           {menus.map((item: any, i: number) => (
-            <MobileMenuItem key={i} item={item} level={0} />
+            <MobileMenuItem
+              key={i}
+              item={item}
+              level={0}
+              closeSidebar={closeSidebar}
+            />
           ))}
         </ul>
       </div>
@@ -103,19 +108,28 @@ function MobileSideMenu({ menus }: any) {
   );
 }
 
-function MobileMenuItem({ item, level }: any) {
+function MobileMenuItem({ item, level, closeSidebar }: any) {
   const [open, setOpen] = useState(false);
+  if (item.main_menu_label_type === "button") {
+    return null;
+  }
   const hasChildren = item.sub_menu_items?.length > 0;
+
+  const handleClick = (e: any) => {
+    if (hasChildren) {
+      e.preventDefault();
+      setOpen(!open);
+    } else {
+      closeSidebar();
+    }
+  };
 
   return (
     <li className={`side-item level-${level}`}>
-      <div
-        className="side-link"
-        onClick={() => (hasChildren ? setOpen(!open) : null)}
-      >
+      <div className="side-link">
         <NavLink
           to={item.main_menu_canonical || item.sub_menu_canonical}
-          onClick={(e) => hasChildren && e.preventDefault()}
+          onClick={handleClick}
         >
           {item.main_menu_label || item.sub_menu_label}
         </NavLink>
@@ -123,15 +137,21 @@ function MobileMenuItem({ item, level }: any) {
         {hasChildren && (
           <i
             className="pi pi-angle-right"
+            onClick={() => setOpen(!open)}
             style={{ transform: open ? "rotate(90deg)" : "rotate(0deg)" }}
-          ></i>
+          />
         )}
       </div>
 
       {hasChildren && (
         <ul className={`mobile-submenu ${open ? "open" : ""}`}>
           {item.sub_menu_items.map((sub: any, i: number) => (
-            <MobileMenuItem key={i} item={sub} level={level + 1} />
+            <MobileMenuItem
+              key={i}
+              item={sub}
+              level={level + 1}
+              closeSidebar={closeSidebar}
+            />
           ))}
         </ul>
       )}

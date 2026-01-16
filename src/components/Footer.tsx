@@ -102,7 +102,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
       <div className="text-center border-top-1 border-black-alpha-20 flex flex-column md:flex-row align-items-center justify-content-between gap-3 pt-4">
-        <div className="flex align-items-center gap-2">
+        <div className="flex flex-column lg:flex-row align-items-center gap-5 lg:gap-2">
           {siteConfig?.site_configs_logo && (
             <img
               src={siteConfig?.site_configs_logo}

@@ -17,6 +17,7 @@ export interface IPageData {
   page_keywords: string | null;
   pages_css_cls: string;
   blocks: IPageBlock[];
+  courses_category: string | null;
 }
 
 export interface ISiteConfig {
